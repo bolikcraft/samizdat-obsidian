@@ -1,0 +1,9 @@
+{
+  "id": "samizdat",
+  "name": "Samizdat",
+  "version": "0.1.0",
+  "minAppVersion": "1.5.8",
+  "description": "Публикация заметки на свой сервер Samizdat одной кнопкой.",
+  "author": "bolikcraft",
+  "isDesktopOnly": false
+}
