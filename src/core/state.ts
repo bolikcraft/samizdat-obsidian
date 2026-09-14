@@ -8,7 +8,8 @@ export interface NoteFacts {
 }
 
 export function buttonState(facts: NoteFacts): ButtonState {
-  if (facts.offline) return 'offline';
+  // Оформление — правка своего файла, сервер ей не нужен: без publish связь не мешает.
+  if (facts.offline) return facts.published ? 'offline' : 'draft';
   if (facts.onServer) return facts.sameHash ? 'published' : 'changed';
   return facts.published ? 'new' : 'draft';
 }

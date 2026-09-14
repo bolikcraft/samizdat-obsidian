@@ -22,8 +22,16 @@ test('статья на сервере важнее отсутствия publish
   assert.equal(buttonState({ published: false, onServer: true, sameHash: true }), 'published');
 });
 
-test('нет связи перебивает всё', () => {
+test('нет связи перебивает всё, если publish стоит', () => {
   assert.equal(buttonState({ published: true, onServer: true, sameHash: true, offline: true }), 'offline');
+});
+
+test('нет связи, но publish не стоит — оформить', () => {
+  assert.equal(buttonState({ published: false, onServer: false, sameHash: false, offline: true }), 'draft');
+});
+
+test('нет связи, publish стоит — нет связи', () => {
+  assert.equal(buttonState({ published: true, onServer: false, sameHash: false, offline: true }), 'offline');
 });
 
 test('надписи по-русски', () => {

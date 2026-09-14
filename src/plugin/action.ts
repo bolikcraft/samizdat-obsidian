@@ -1,14 +1,17 @@
 import { App, Notice, TFile } from 'obsidian';
 import { articleHash } from '../core/hash.ts';
 import { buttonLabel, buttonState, type ButtonState } from '../core/state.ts';
-import { SamizdatClient } from './client.ts';
-import { readNote } from './note.ts';
+import { OfflineError, SamizdatClient } from './client.ts';
+import { readNote, type NoteSnapshot } from './note.ts';
 import type { SamizdatSettings } from './settings.ts';
+
+export const BUSY_LABEL = 'Samizdat: отправляю…';
 
 export class PublishAction {
   private serverState: Record<string, string> = {};
   private offline = true;
   private busy = false;
+  private lastError: string | null = null;
 
   constructor(private app: App, private settings: SamizdatSettings) {}
 
@@ -16,23 +19,31 @@ export class PublishAction {
     return new SamizdatClient(this.settings.serverUrl, this.settings.token);
   }
 
+  isBusy(): boolean {
+    return this.busy;
+  }
+
   async refresh(): Promise<void> {
     try {
       this.serverState = await this.client.state();
       this.offline = false;
-    } catch {
+    } catch (error) {
       this.offline = true;
+      this.lastError = (error as Error).message;
     }
   }
 
   async stateOf(file: TFile | null): Promise<ButtonState | null> {
     if (!file || file.extension !== 'md') return null;
-    if (this.offline) return 'offline';
-
     const note = await readNote(this.app, file);
+    return this.stateFromNote(note);
+  }
+
+  private async stateFromNote(note: NoteSnapshot): Promise<ButtonState> {
+    if (this.offline) return buttonState({ published: note.published, onServer: false, sameHash: false, offline: true });
+
     const known = this.serverState[note.slug];
     const hash = await articleHash(note.markdown, note.folder, note.attachments);
-
     return buttonState({ published: note.published, onServer: known !== undefined, sameHash: known === hash });
   }
 
@@ -45,11 +56,16 @@ export class PublishAction {
 
     this.busy = true;
     try {
-      const state = await this.stateOf(file);
-      if (state === 'offline') { await this.refresh(); return; }
+      const note = await readNote(this.app, file);
+      const state = await this.stateFromNote(note);
+
+      if (state === 'offline') {
+        new Notice(this.lastError ?? 'Нет связи с сервером');
+        await this.refresh();
+        return;
+      }
       if (state === 'draft') { await this.markPublishable(file); return; }
 
-      const note = await readNote(this.app, file);
       if (state === 'published') {
         if (!confirm(`Снять «${file.basename}» с публикации? Гостевые ссылки на неё перестанут работать.`)) return;
         await this.client.remove(note.slug);
@@ -62,8 +78,11 @@ export class PublishAction {
       this.serverState[note.slug] = hash;
       new Notice(state === 'changed' ? 'Статья обновлена' : 'Статья опубликована');
     } catch (error) {
+      if (error instanceof OfflineError) {
+        this.offline = true;
+        this.lastError = error.message;
+      }
       new Notice((error as Error).message);
-      if ((error as Error).message.includes('Сервер ответил')) this.offline = false;
     } finally {
       this.busy = false;
       onDone();
