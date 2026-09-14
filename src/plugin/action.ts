@@ -91,7 +91,8 @@ export class PublishAction {
 
   /// «Оформить»: publish ставим всегда, чужие title и description не перетираем.
   private async markPublishable(file: TFile): Promise<void> {
-    const heading = this.app.metadataCache.getFileCache(file)?.headings?.[0]?.heading;
+    const headings = this.app.metadataCache.getFileCache(file)?.headings ?? [];
+    const heading = headings.find(item => item.level === 1)?.heading;
 
     await this.app.fileManager.processFrontMatter(file, front => {
       front.publish = true;

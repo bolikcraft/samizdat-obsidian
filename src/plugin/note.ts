@@ -2,8 +2,6 @@ import { App, TFile } from 'obsidian';
 import type { Attachment } from '../core/hash.ts';
 import { slugFromTitle, validateSlug } from '../core/slug.ts';
 
-const IMAGE = /\.(png|jpe?g|gif|webp|svg|avif)$/i;
-
 export interface NoteSnapshot {
   slug: string;
   folder: string;
@@ -31,9 +29,9 @@ export async function readNote(app: App, file: TFile): Promise<NoteSnapshot> {
   const seen = new Set<string>();
   const embeds = app.metadataCache.getFileCache(file)?.embeds ?? [];
   for (const embed of embeds) {
-    if (!IMAGE.test(embed.link)) continue;
     const target = app.metadataCache.getFirstLinkpathDest(embed.link, file.path);
-    if (!target || seen.has(target.name)) continue;
+    // Встроенную заметку не шлём: CLI ищет файл по имени с расширением и такую ссылку не находит.
+    if (!target || target.extension === 'md' || seen.has(target.name)) continue;
     seen.add(target.name);
     const bytes = new Uint8Array(await app.vault.readBinary(target));
     attachments.push({ name: target.name, bytes });
