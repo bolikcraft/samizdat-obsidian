@@ -1,0 +1,47 @@
+import test from 'node:test';
+import assert from 'node:assert';
+import { buildMultipart } from '../src/core/multipart.ts';
+
+const utf8 = (text: string) => new TextEncoder().encode(text);
+const asText = (body: ArrayBuffer) => new TextDecoder('utf-8').decode(body);
+
+test('тело содержит папку, index.md и вложение', () => {
+  const { body, contentType } = buildMultipart(utf8('# Привет'), 'Заметки/Свои', [
+    { name: 'kot.png', bytes: new Uint8Array([1, 2, 3]) },
+  ]);
+
+  const text = asText(body);
+  const boundary = contentType.split('boundary=')[1];
+
+  assert.ok(contentType.startsWith('multipart/form-data; boundary='));
+  assert.ok(text.includes(`--${boundary}`));
+  assert.ok(text.includes('name="folder"'));
+  assert.ok(text.includes('Заметки/Свои'));
+  assert.ok(text.includes('name="index.md"; filename="index.md"'));
+  assert.ok(text.includes('# Привет'));
+  assert.ok(text.includes('name="attachments"; filename="kot.png"'));
+  assert.ok(text.endsWith(`--${boundary}--\r\n`));
+});
+
+test('пустая папка тоже уезжает полем', () => {
+  const { body } = buildMultipart(utf8('текст'), '', []);
+  assert.ok(asText(body).includes('name="folder"'));
+});
+
+test('байты вложения не портятся', () => {
+  const bytes = new Uint8Array([0, 255, 10, 13, 200]);
+  const { body } = buildMultipart(utf8('т'), '', [{ name: 'a.bin', bytes }]);
+
+  const whole = new Uint8Array(body);
+  let found = false;
+  for (let start = 0; start + bytes.length <= whole.length; start++) {
+    if (bytes.every((byte, shift) => whole[start + shift] === byte)) { found = true; break; }
+  }
+  assert.ok(found, 'байты вложения должны лежать в теле подряд');
+});
+
+test('у каждого запроса своя граница', () => {
+  const one = buildMultipart(utf8('a'), '', []).contentType;
+  const two = buildMultipart(utf8('a'), '', []).contentType;
+  assert.notEqual(one, two);
+});
