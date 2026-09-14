@@ -21,7 +21,7 @@ export function buildMultipart(markdown: Uint8Array, folder: string,
   push('\r\n');
 
   for (const item of attachments) {
-    push(`--${boundary}\r\nContent-Disposition: form-data; name="attachments"; filename="${item.name}"\r\n` +
+    push(`--${boundary}\r\nContent-Disposition: form-data; name="attachments"; filename="${escapeFilename(item.name)}"\r\n` +
          'Content-Type: application/octet-stream\r\n\r\n');
     parts.push(item.bytes);
     push('\r\n');
@@ -38,4 +38,9 @@ export function buildMultipart(markdown: Uint8Array, folder: string,
   }
 
   return { body: body.buffer, contentType: `multipart/form-data; boundary=${boundary}` };
+}
+
+// \r и \n рвут строку заголовка; " и \ подставляем экранированными, чтобы не сломать её разбор.
+function escapeFilename(name: string): string {
+  return name.replace(/[\r\n]/g, '').replace(/[\\"]/g, char => `\\${char}`);
 }
