@@ -16,7 +16,8 @@ This plugin does the same work from inside Obsidian, on a computer and on a phon
 
 ## What the button does
 
-The button sits in the status bar at the bottom right. It shows the state of the open note:
+The button sits in the status bar at the bottom right. It shows the state of the open note (the
+names below are the English ones):
 
 | The button says | The note is | The button then |
 |---|---|---|
@@ -38,11 +39,11 @@ The plugin is not in the community catalog. Use BRAT, which installs a plugin fr
 keeps it up to date:
 
 1. In Obsidian, install the plugin **BRAT** from the catalog, and turn it on.
-2. Run the command «BRAT: Add a beta plugin for testing».
-3. Write `bolikcraft/samizdat-obsidian`, keep «Latest version», and add the plugin.
+2. Run the command "BRAT: Add a beta plugin for testing".
+3. Write `bolikcraft/samizdat-obsidian`, keep "Latest version", and add the plugin.
 4. In Settings → Community plugins, turn on Samizdat.
 
-To get a new version later, run «BRAT: Check for updates to all beta plugins», or let BRAT do it
+To get a new version later, run "BRAT: Check for updates to all beta plugins", or let BRAT do it
 at start.
 
 You can also copy the files by hand: take `main.js` and `manifest.json` from a
@@ -50,10 +51,22 @@ You can also copy the files by hand: take `main.js` and `manifest.json` from a
 `<vault>/.obsidian/plugins/samizdat/`, and turn the plugin on.
 
 Then open the plugin settings and write the address of your server and a token. You make the token
-on the site: Settings → Tokens. The button «Check» tells you how many articles the server has.
+on the site: Settings → Tokens. The button "Check" tells you how many articles the server has.
 
-The plugin speaks the language of Obsidian. To use a different language, change it in the plugin
-settings. The names of the commands in the palette change only after a restart of Obsidian.
+## Language
+
+The plugin speaks the language of Obsidian. It knows 12 languages:
+
+English, Deutsch, Español, Français, Bahasa Indonesia, Italiano, Polski, Português (Brasil),
+Русский, Türkçe, Українська, 简体中文.
+
+If Obsidian speaks a different language, the plugin shows English. To select a language yourself,
+use the first item in the plugin settings. The names of the commands in the palette change only
+after a restart of Obsidian.
+
+To add a language, copy `src/i18n/strings.ts` into `src/i18n/locales/<code>.ts`, translate the
+values, and add the file to `LOCALES` in `src/i18n/index.ts`. The type `Strings` does not let a
+translation forget a key.
 
 ## Build
 
