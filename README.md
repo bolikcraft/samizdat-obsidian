@@ -34,11 +34,20 @@ server is the same as the note in the vault.
 
 ## Install
 
-The plugin is not in the community catalog. Copy it into the vault:
+The plugin is not in the community catalog. Use BRAT, which installs a plugin from GitHub and
+keeps it up to date:
 
-1. Build it, or take `main.js` and `manifest.json` from a release.
-2. Put both files into `<vault>/.obsidian/plugins/samizdat/`.
-3. In Obsidian, open Settings → Community plugins, and turn on Samizdat.
+1. In Obsidian, install the plugin **BRAT** from the catalog, and turn it on.
+2. Run the command «BRAT: Add a beta plugin for testing».
+3. Write `bolikcraft/samizdat-obsidian`, keep «Latest version», and add the plugin.
+4. In Settings → Community plugins, turn on Samizdat.
+
+To get a new version later, run «BRAT: Check for updates to all beta plugins», or let BRAT do it
+at start.
+
+You can also copy the files by hand: take `main.js` and `manifest.json` from a
+[release](https://github.com/bolikcraft/samizdat-obsidian/releases), put both into
+`<vault>/.obsidian/plugins/samizdat/`, and turn the plugin on.
 
 Then open the plugin settings and write the address of your server and a token. You make the token
 on the site: Settings → Tokens. The button «Проверить» (Check) tells you how many articles the
@@ -51,6 +60,16 @@ npm install
 npm run build   # makes main.js
 npm test        # 29 tests
 ```
+
+## Release
+
+```bash
+npm version patch          # writes manifest.json and versions.json
+git push --follow-tags     # the tag starts the build and makes the release
+```
+
+GitHub Actions builds the plugin and puts `main.js` and `manifest.json` into the release. BRAT
+takes the files from there.
 
 ## Limits
 
