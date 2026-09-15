@@ -1,5 +1,7 @@
 import { MarkdownView, Menu, Platform, Plugin, TFile } from 'obsidian';
-import { BUSY_LABEL, PublishAction } from './plugin/action.ts';
+import { t } from './i18n/index.ts';
+import { PublishAction } from './plugin/action.ts';
+import { applyLanguage } from './plugin/language.ts';
 import { DEFAULT_SETTINGS, SamizdatSettingTab, type SamizdatSettings } from './plugin/settings.ts';
 
 const MODIFY_DEBOUNCE_MS = 500;
@@ -12,6 +14,7 @@ export default class SamizdatPlugin extends Plugin {
 
   async onload() {
     await this.loadSettings();
+    applyLanguage(this.settings.language);
     this.action = new PublishAction(this.app, this.settings);
     this.addSettingTab(new SamizdatSettingTab(this.app, this));
 
@@ -23,20 +26,20 @@ export default class SamizdatPlugin extends Plugin {
 
     this.addCommand({
       id: 'publish-note',
-      name: 'Опубликовать заметку',
+      name: t('command.publish'),
       callback: () => this.trigger(this.activeFile()),
     });
 
     this.addCommand({
       id: 'check-server',
-      name: 'Проверить связь с сервером',
+      name: t('command.check'),
       callback: async () => { await this.action.refresh(); this.redraw(); },
     });
 
     this.registerEvent(this.app.workspace.on('file-menu', (menu: Menu, file) => {
       if (!(file instanceof TFile) || file.extension !== 'md') return;
       menu.addItem(item => item
-        .setTitle('Samizdat: опубликовать')
+        .setTitle(t('menu.publish'))
         .setIcon('upload')
         .onClick(() => this.trigger(file)));
     }));
@@ -66,19 +69,19 @@ export default class SamizdatPlugin extends Plugin {
     this.redraw();
   }
 
-  private async redraw(): Promise<void> {
+  async redraw(): Promise<void> {
     if (!this.status) return;
-    if (this.action.isBusy()) { this.status.setText(BUSY_LABEL); return; }
+    if (this.action.isBusy()) { this.status.setText(t('status.busy')); return; }
 
     const file = this.activeFile();
     const path = file?.path ?? null;
     try {
       const state = await this.action.stateOf(file);
       if (this.activeFile()?.path !== path) return; // заметку успели сменить, пока читали эту
-      this.status.setText(state === null ? '' : `Samizdat: ${this.action.label(state)}`);
+      this.status.setText(state === null ? '' : t('status.label', { label: this.action.label(state) }));
     } catch {
       if (this.activeFile()?.path !== path) return;
-      this.status.setText('Samizdat: не удалось прочитать заметку');
+      this.status.setText(t('status.unreadable'));
     }
   }
 

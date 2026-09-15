@@ -1,10 +1,11 @@
 import { requestUrl, type RequestUrlParam, type RequestUrlResponse } from 'obsidian';
 import type { Attachment } from '../core/hash.ts';
 import { buildMultipart } from '../core/multipart.ts';
+import { t } from '../i18n/index.ts';
 
 export class OfflineError extends Error {
   constructor(address: string) {
-    super(`Сервер не отвечает: ${address}`);
+    super(t('error.offline', { address }));
     this.name = 'OfflineError';
   }
 }
@@ -31,8 +32,8 @@ export class SamizdatClient {
       headers: { Authorization: `Bearer ${this.token}` },
       throw: false,
     });
-    if (answer.status === 401) throw new Error('Токен не подошёл');
-    if (answer.status !== 200) throw new Error(`Сервер ответил ${answer.status}`);
+    if (answer.status === 401) throw new Error(t('error.token'));
+    if (answer.status !== 200) throw new Error(t('error.status', { status: answer.status }));
     return answer.json as Record<string, string>;
   }
 
@@ -46,8 +47,8 @@ export class SamizdatClient {
       body,
       throw: false,
     });
-    if (answer.status === 401) throw new Error('Токен не подошёл');
-    if (answer.status !== 200) throw new Error(answer.text || `Сервер ответил ${answer.status}`);
+    if (answer.status === 401) throw new Error(t('error.token'));
+    if (answer.status !== 200) throw new Error(answer.text || t('error.status', { status: answer.status }));
     return (answer.json as { hash: string }).hash;
   }
 
@@ -58,7 +59,7 @@ export class SamizdatClient {
       headers: { Authorization: `Bearer ${this.token}` },
       throw: false,
     });
-    if (answer.status === 401) throw new Error('Токен не подошёл');
-    if (answer.status !== 200) throw new Error(answer.text || `Сервер ответил ${answer.status}`);
+    if (answer.status === 401) throw new Error(t('error.token'));
+    if (answer.status !== 200) throw new Error(answer.text || t('error.status', { status: answer.status }));
   }
 }

@@ -13,15 +13,3 @@ export function buttonState(facts: NoteFacts): ButtonState {
   if (facts.onServer) return facts.sameHash ? 'published' : 'changed';
   return facts.published ? 'new' : 'draft';
 }
-
-const LABELS: Record<ButtonState, string> = {
-  draft: 'Оформить',
-  new: 'Опубликовать',
-  changed: 'Обновить',
-  published: 'Снять с публикации',
-  offline: 'Нет связи',
-};
-
-export function buttonLabel(state: ButtonState): string {
-  return LABELS[state];
-}

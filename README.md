@@ -20,11 +20,11 @@ The button sits in the status bar at the bottom right. It shows the state of the
 
 | The button says | The note is | The button then |
 |---|---|---|
-| Оформить (Prepare) | without `publish: true` | writes the front matter: `publish`, `title`, `description` |
-| Опубликовать (Publish) | ready, but not on the server | sends the note and its images |
-| Обновить (Update) | on the server, but changed | sends it again |
-| Снять с публикации (Unpublish) | on the server and the same | removes it from the server, after you agree |
-| Нет связи (No connection) | — | tries to reach the server again |
+| Prepare | without `publish: true` | writes the front matter: `publish`, `title`, `description` |
+| Publish | ready, but not on the server | sends the note and its images |
+| Update | on the server, but changed | sends it again |
+| Unpublish | on the server and the same | removes it from the server, after you agree |
+| No connection | — | tries to reach the server again |
 
 The same action is also a command in the palette and an item in the file menu. On a phone there is
 no status bar, so use the command or the menu.
@@ -50,15 +50,17 @@ You can also copy the files by hand: take `main.js` and `manifest.json` from a
 `<vault>/.obsidian/plugins/samizdat/`, and turn the plugin on.
 
 Then open the plugin settings and write the address of your server and a token. You make the token
-on the site: Settings → Tokens. The button «Проверить» (Check) tells you how many articles the
-server has.
+on the site: Settings → Tokens. The button «Check» tells you how many articles the server has.
+
+The plugin speaks the language of Obsidian. To use a different language, change it in the plugin
+settings. The names of the commands in the palette change only after a restart of Obsidian.
 
 ## Build
 
 ```bash
 npm install
 npm run build   # makes main.js
-npm test        # 29 tests
+npm test        # 42 tests
 ```
 
 ## Release

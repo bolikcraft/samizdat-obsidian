@@ -1,3 +1,5 @@
+import { t } from '../i18n/index.ts';
+
 const CYRILLIC: Record<string, string> = {
   'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e',
   'ё': 'e', 'ж': 'zh', 'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k',
@@ -24,9 +26,9 @@ export function slugFromTitle(title: string): string {
 /// slug идёт прямо в адрес и в имя каталога на сервере: чужой хост через `//` и выход
 /// за пределы каталога статей через `..` быть не должны.
 export function validateSlug(slug: string): string {
-  if (slug.trim().length === 0) throw new Error('пустой slug');
-  if (slug.includes('/') || slug.includes('\\')) throw new Error(`slug «${slug}» не должен содержать / или \\`);
-  if (slug.includes('..')) throw new Error(`slug «${slug}» не должен содержать «..»`);
-  if (slug.startsWith('.')) throw new Error(`slug «${slug}» не должен начинаться с точки`);
+  if (slug.trim().length === 0) throw new Error(t('error.slugEmpty'));
+  if (slug.includes('/') || slug.includes('\\')) throw new Error(t('error.slugSlash', { slug }));
+  if (slug.includes('..')) throw new Error(t('error.slugDots', { slug }));
+  if (slug.startsWith('.')) throw new Error(t('error.slugDot', { slug }));
   return slug;
 }

@@ -1,11 +1,10 @@
 import { App, Notice, TFile } from 'obsidian';
 import { articleHash } from '../core/hash.ts';
-import { buttonLabel, buttonState, type ButtonState } from '../core/state.ts';
+import { buttonState, type ButtonState } from '../core/state.ts';
+import { t } from '../i18n/index.ts';
 import { OfflineError, SamizdatClient } from './client.ts';
 import { readNote, type NoteSnapshot } from './note.ts';
 import type { SamizdatSettings } from './settings.ts';
-
-export const BUSY_LABEL = 'Samizdat: отправляю…';
 
 export class PublishAction {
   private serverState: Record<string, string> = {};
@@ -50,7 +49,7 @@ export class PublishAction {
   async run(file: TFile | null, onDone: () => void): Promise<void> {
     if (!file || this.busy) return;
     if (this.settings.token.length === 0 || this.settings.serverUrl.length === 0) {
-      new Notice('Откройте настройки плагина: нет адреса или токена');
+      new Notice(t('notice.noSettings'));
       return;
     }
 
@@ -60,23 +59,23 @@ export class PublishAction {
       const state = await this.stateFromNote(note);
 
       if (state === 'offline') {
-        new Notice(this.lastError ?? 'Нет связи с сервером');
+        new Notice(this.lastError ?? t('notice.offline'));
         await this.refresh();
         return;
       }
       if (state === 'draft') { await this.markPublishable(file); return; }
 
       if (state === 'published') {
-        if (!confirm(`Снять «${file.basename}» с публикации? Гостевые ссылки на неё перестанут работать.`)) return;
+        if (!confirm(t('confirm.unpublish', { name: file.basename }))) return;
         await this.client.remove(note.slug);
         delete this.serverState[note.slug];
-        new Notice('Статья снята с публикации');
+        new Notice(t('notice.unpublished'));
         return;
       }
 
       const hash = await this.client.put(note.slug, note.markdown, note.folder, note.attachments);
       this.serverState[note.slug] = hash;
-      new Notice(state === 'changed' ? 'Статья обновлена' : 'Статья опубликована');
+      new Notice(t(state === 'changed' ? 'notice.updated' : 'notice.published'));
     } catch (error) {
       if (error instanceof OfflineError) {
         this.offline = true;
@@ -100,10 +99,10 @@ export class PublishAction {
       if (front.description === undefined) front.description = '';
     });
 
-    new Notice('Заметка оформлена. Нажмите ещё раз, чтобы опубликовать');
+    new Notice(t('notice.prepared'));
   }
 
   label(state: ButtonState | null): string {
-    return state === null ? '' : buttonLabel(state);
+    return state === null ? '' : t(`state.${state}`);
   }
 }

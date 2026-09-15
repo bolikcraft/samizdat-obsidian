@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert';
-import { buttonState, buttonLabel } from '../src/core/state.ts';
+import { buttonState } from '../src/core/state.ts';
+import { setLocale, t } from '../src/i18n/index.ts';
 
 test('нет publish — оформить', () => {
   assert.equal(buttonState({ published: false, onServer: false, sameHash: false }), 'draft');
@@ -35,9 +36,10 @@ test('нет связи, publish стоит — нет связи', () => {
 });
 
 test('надписи по-русски', () => {
-  assert.equal(buttonLabel('draft'), 'Оформить');
-  assert.equal(buttonLabel('new'), 'Опубликовать');
-  assert.equal(buttonLabel('changed'), 'Обновить');
-  assert.equal(buttonLabel('published'), 'Снять с публикации');
-  assert.equal(buttonLabel('offline'), 'Нет связи');
+  setLocale('ru');
+  assert.equal(t('state.draft'), 'Оформить');
+  assert.equal(t('state.new'), 'Опубликовать');
+  assert.equal(t('state.changed'), 'Обновить');
+  assert.equal(t('state.published'), 'Снять с публикации');
+  assert.equal(t('state.offline'), 'Нет связи');
 });
