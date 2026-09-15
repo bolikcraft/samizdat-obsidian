@@ -60,7 +60,7 @@ settings. The names of the commands in the palette change only after a restart o
 ```bash
 npm install
 npm run build   # makes main.js
-npm test        # 42 tests
+npm test        # 43 tests
 ```
 
 ## Release

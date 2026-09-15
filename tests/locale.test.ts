@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert';
 import { pickLocale } from '../src/core/locale.ts';
+import { localeCodes } from '../src/i18n/index.ts';
 
 const AVAILABLE = ['en', 'ru', 'zh-Hans', 'pt-BR', 'de'];
 
@@ -31,4 +32,15 @@ test('пусто — английский: Obsidian так и хранит св�
 test('неизвестный язык — английский', () => {
   assert.equal(pickLocale('kl', AVAILABLE), 'en');
   assert.equal(pickLocale('ru', ['en']), 'en');
+});
+
+/// Список выше выдуман; здесь проверяем настоящий реестр — коды Obsidian и ALIASES вместе.
+test('каждый язык реестра достижим, коды Obsidian ведут на свой словарь', () => {
+  const real = localeCodes();
+  for (const code of real) {
+    assert.equal(pickLocale(code, real), code, `${code} не нашёлся`);
+  }
+  assert.equal(pickLocale('zh', real), 'zh-Hans');
+  assert.equal(pickLocale('zh-TW', real), 'zh-Hans');
+  assert.equal(pickLocale('pt', real), 'pt-BR');
 });

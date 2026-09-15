@@ -10,7 +10,7 @@ export const en = {
   'state.offline': 'No connection',
 
   'status.label': 'Samizdat: {label}',
-  'status.busy': 'Samizdat: sends…',
+  'status.busy': 'Samizdat: sending…',
   'status.unreadable': 'Samizdat: cannot read the note',
 
   'command.publish': 'Publish note',
