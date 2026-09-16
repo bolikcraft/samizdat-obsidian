@@ -1,8 +1,10 @@
 const FALLBACK = 'en';
 
-/// Общий код языка вместо конкретного словаря: Obsidian просит `zh`, а словарь один.
+/// Коды Obsidian вместо наших. `zh-TW` нужен явно: иначе он дойдёт до словаря
+/// по общему коду `zh` и тайваньский Obsidian получит упрощённый китайский.
 const ALIASES: Record<string, string> = {
   zh: 'zh-Hans',
+  'zh-TW': 'zh-Hant',
   pt: 'pt-BR',
 };
 

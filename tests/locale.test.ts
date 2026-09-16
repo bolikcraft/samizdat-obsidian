@@ -41,6 +41,6 @@ test('каждый язык реестра достижим, коды Obsidian �
     assert.equal(pickLocale(code, real), code, `${code} не нашёлся`);
   }
   assert.equal(pickLocale('zh', real), 'zh-Hans');
-  assert.equal(pickLocale('zh-TW', real), 'zh-Hans');
+  assert.equal(pickLocale('zh-TW', real), 'zh-Hant');
   assert.equal(pickLocale('pt', real), 'pt-BR');
 });
