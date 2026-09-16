@@ -10,6 +10,16 @@ test('в каждом языке есть все ключи английског
   }
 });
 
+/// Потерянный при переводе {count} не ломает сборку: строка просто выходит без числа.
+test('набор плейсхолдеров везде как в английском', () => {
+  const marks = (text: string) => (text.match(/\{\w+\}/g) ?? []).sort();
+  for (const [code, strings] of Object.entries(LOCALES)) {
+    for (const [key, text] of Object.entries(en)) {
+      assert.deepEqual(marks(strings[key as keyof typeof en]), marks(text), `${code}: ключ ${key}`);
+    }
+  }
+});
+
 test('нигде нет пустых строк', () => {
   for (const [code, strings] of Object.entries(LOCALES)) {
     for (const [key, text] of Object.entries(strings)) {

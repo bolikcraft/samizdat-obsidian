@@ -113,7 +113,7 @@ translation forget a key.
 ```bash
 npm install
 npm run build   # makes main.js
-npm test        # 43 tests
+npm test        # 44 tests
 ```
 
 ## Release
