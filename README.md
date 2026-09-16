@@ -94,10 +94,11 @@ server is the same as the note in the vault.
 
 ## Language
 
-The plugin speaks the language of Obsidian. It knows 12 languages:
+The plugin speaks the language of Obsidian. It knows 20 languages:
 
-English, Deutsch, Español, Français, Bahasa Indonesia, Italiano, Polski, Português (Brasil),
-Русский, Türkçe, Українська, 简体中文.
+English, Беларуская, Български, Čeština, Deutsch, Español, Français, Magyar, Bahasa Indonesia,
+Italiano, 日本語, 한국어, Nederlands, Polski, Português (Brasil), Русский, Türkçe, Українська,
+简体中文, 繁體中文.
 
 If Obsidian speaks a different language, the plugin shows English. To select a language yourself,
 use the first item in the plugin settings. The names of the commands in the palette change only
