@@ -40,6 +40,8 @@ other plugins from GitHub and keeps them up to date.
 
 Samizdat is now in Settings → Community plugins, and the button is in the status bar.
 
+![The plugin in the list of installed plugins](docs/images/installed-plugin.png)
+
 **New versions:** BRAT looks for them when Obsidian starts. To look now, run
 **BRAT: Plugins: Check for updates to all beta plugins and UPDATE**.
 
@@ -57,6 +59,8 @@ Open Settings → Samizdat and fill in two fields:
 
 Then click **Check**. It tells you how many articles the server has. If it says that the server
 does not answer, look at the address; if it says that the token is wrong, make a new token.
+
+![The settings of the plugin, and the result of the check](docs/images/settings.png)
 
 ## Your first article
 
