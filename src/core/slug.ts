@@ -128,3 +128,9 @@ export function validateSlug(slug: string): string {
 export function hasControl(text: string): boolean {
   return /[\u0000-\u001F\u007F-\u009F]/.test(text);
 }
+
+/// Same order as VaultScanner in the CLI. An empty title or slug in the front matter is a value, not a gap.
+export function noteSlug(front: Record<string, unknown>, basename: string): string {
+  if (typeof front.slug === 'string') return validateSlug(front.slug);
+  return slugFromTitle(typeof front.title === 'string' ? front.title : basename);
+}

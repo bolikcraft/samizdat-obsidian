@@ -1,6 +1,6 @@
 import { App, TFile } from 'obsidian';
 import type { Attachment } from '../core/hash.ts';
-import { slugFromTitle, validateSlug } from '../core/slug.ts';
+import { noteSlug } from '../core/slug.ts';
 
 export interface NoteSnapshot {
   slug: string;
@@ -23,9 +23,7 @@ export async function readNote(app: App, file: TFile): Promise<NoteSnapshot> {
   const front = app.metadataCache.getFileCache(file)?.frontmatter ?? {};
   const published = front.publish === true;
 
-  const slug = typeof front.slug === 'string' && front.slug.length > 0
-    ? validateSlug(front.slug)
-    : slugFromTitle(typeof front.title === 'string' && front.title.length > 0 ? front.title : file.basename);
+  const slug = noteSlug(front, file.basename);
 
   const attachments: Attachment[] = [];
   const seen = new Set<string>();

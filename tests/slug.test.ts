@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert';
 import { readFileSync } from 'node:fs';
-import { slugFromTitle, validateSlug } from '../src/core/slug.ts';
+import { noteSlug, slugFromTitle, validateSlug } from '../src/core/slug.ts';
 import { setLocale } from '../src/i18n/index.ts';
 
 setLocale('en');
@@ -110,4 +110,21 @@ test('причина отказа названа словами', () => {
   assert.throws(() => validateSlug('a\u0001b'), /control characters/);
   assert.throws(() => validateSlug('a?b'), /\?, # or %/);
   assert.throws(() => validateSlug('я'.repeat(101)), /200 bytes/);
+});
+
+// VaultScanner in the CLI: an explicit slug wins, then the title, then the file name.
+test('slug заметки берётся из шапки, потом из title, потом из имени файла', () => {
+  assert.equal(noteSlug({ slug: 'dostup', title: 'Заголовок' }, 'Файл'), 'dostup');
+  assert.equal(noteSlug({ title: 'Заголовок' }, 'Файл'), 'zagolovok');
+  assert.equal(noteSlug({}, 'Файл'), 'fayl');
+  assert.equal(noteSlug({ slug: null, title: null }, 'Файл'), 'fayl');
+});
+
+test('пустой title даёт запасной slug, как в CLI', () => {
+  assert.equal(noteSlug({ title: '' }, 'Файл'), 'bez-nazvaniya');
+});
+
+test('пустой явный slug отвергается, как в CLI', () => {
+  assert.throws(() => noteSlug({ slug: '' }, 'Файл'), /is empty/);
+  assert.throws(() => noteSlug({ slug: '   ' }, 'Файл'), /is empty/);
 });
