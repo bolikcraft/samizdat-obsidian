@@ -38,8 +38,8 @@ export class SamizdatClient {
   }
 
   async put(slug: string, markdown: Uint8Array, folder: string,
-            attachments: Attachment[]): Promise<string> {
-    const { body, contentType } = buildMultipart(markdown, folder, attachments);
+            attachments: Attachment[], name: string): Promise<string> {
+    const { body, contentType } = buildMultipart(markdown, folder, attachments, name);
     const answer = await this.request({
       url: `${this.base}/api/articles/${encodeURIComponent(slug)}`,
       method: 'PUT',

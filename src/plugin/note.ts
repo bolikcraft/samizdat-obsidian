@@ -5,6 +5,8 @@ import { slugFromTitle, validateSlug } from '../core/slug.ts';
 export interface NoteSnapshot {
   slug: string;
   folder: string;
+  /// File name without .md, as the CLI sends it. The server finds [[links]] by this name.
+  name: string;
   markdown: Uint8Array;
   attachments: Attachment[];
   published: boolean;
@@ -37,7 +39,7 @@ export async function readNote(app: App, file: TFile): Promise<NoteSnapshot> {
     attachments.push({ name: target.name, bytes });
   }
 
-  return { slug, folder, markdown, attachments, published };
+  return { slug, folder, name: file.basename, markdown, attachments, published };
 }
 
 function stripBom(bytes: Uint8Array): Uint8Array {

@@ -42,7 +42,7 @@ export class PublishAction {
     if (this.offline) return buttonState({ published: note.published, onServer: false, sameHash: false, offline: true });
 
     const known = this.serverState[note.slug];
-    const hash = await articleHash(note.markdown, note.folder, note.attachments);
+    const hash = await articleHash(note.markdown, note.folder, note.attachments, note.name);
     return buttonState({ published: note.published, onServer: known !== undefined, sameHash: known === hash });
   }
 
@@ -73,7 +73,7 @@ export class PublishAction {
         return;
       }
 
-      const hash = await this.client.put(note.slug, note.markdown, note.folder, note.attachments);
+      const hash = await this.client.put(note.slug, note.markdown, note.folder, note.attachments, note.name);
       this.serverState[note.slug] = hash;
       new Notice(t(state === 'changed' ? 'notice.updated' : 'notice.published'));
     } catch (error) {

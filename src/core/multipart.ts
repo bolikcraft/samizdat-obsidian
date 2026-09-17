@@ -6,7 +6,7 @@ export interface MultipartBody {
 }
 
 export function buildMultipart(markdown: Uint8Array, folder: string,
-                               attachments: Attachment[]): MultipartBody {
+                               attachments: Attachment[], name: string): MultipartBody {
   const boundary = `samizdat${Date.now().toString(16)}${Math.random().toString(16).slice(2)}`;
   const encoder = new TextEncoder();
   const parts: Uint8Array[] = [];
@@ -14,6 +14,7 @@ export function buildMultipart(markdown: Uint8Array, folder: string,
   const push = (text: string) => parts.push(encoder.encode(text));
 
   push(`--${boundary}\r\nContent-Disposition: form-data; name="folder"\r\n\r\n${folder}\r\n`);
+  push(`--${boundary}\r\nContent-Disposition: form-data; name="name"\r\n\r\n${name}\r\n`);
 
   push(`--${boundary}\r\nContent-Disposition: form-data; name="index.md"; filename="index.md"\r\n` +
        'Content-Type: text/markdown\r\n\r\n');

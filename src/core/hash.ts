@@ -4,7 +4,7 @@ export interface Attachment {
 }
 
 export async function articleHash(markdown: Uint8Array, folder: string,
-                                  attachments: Attachment[]): Promise<string> {
+                                  attachments: Attachment[], name: string | null): Promise<string> {
   const encoder = new TextEncoder();
   const parts: Uint8Array[] = [markdown, encoder.encode(folder)];
 
@@ -13,6 +13,12 @@ export async function articleHash(markdown: Uint8Array, folder: string,
   for (const item of sorted) {
     parts.push(encoder.encode(item.name));
     parts.push(item.bytes);
+  }
+
+  // A zero byte separates the name from the last attachment. The server ignores an empty name.
+  if (name) {
+    parts.push(new Uint8Array([0]));
+    parts.push(encoder.encode(name));
   }
 
   const total = parts.reduce((sum, part) => sum + part.length, 0);

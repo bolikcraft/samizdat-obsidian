@@ -8,7 +8,7 @@ const asText = (body: ArrayBuffer) => new TextDecoder('utf-8').decode(body);
 test('тело содержит папку, index.md и вложение', () => {
   const { body, contentType } = buildMultipart(utf8('# Привет'), 'Заметки/Свои', [
     { name: 'kot.png', bytes: new Uint8Array([1, 2, 3]) },
-  ]);
+  ], 'Заметка');
 
   const text = asText(body);
   const boundary = contentType.split('boundary=')[1];
@@ -24,13 +24,13 @@ test('тело содержит папку, index.md и вложение', () =>
 });
 
 test('пустая папка тоже уезжает полем', () => {
-  const { body } = buildMultipart(utf8('текст'), '', []);
+  const { body } = buildMultipart(utf8('текст'), '', [], 'заметка');
   assert.ok(asText(body).includes('name="folder"'));
 });
 
 test('байты вложения не портятся', () => {
   const bytes = new Uint8Array([0, 255, 10, 13, 200]);
-  const { body } = buildMultipart(utf8('т'), '', [{ name: 'a.bin', bytes }]);
+  const { body } = buildMultipart(utf8('т'), '', [{ name: 'a.bin', bytes }], 'заметка');
 
   const whole = new Uint8Array(body);
   let found = false;
@@ -41,13 +41,13 @@ test('байты вложения не портятся', () => {
 });
 
 test('у каждого запроса своя граница', () => {
-  const one = buildMultipart(utf8('a'), '', []).contentType;
-  const two = buildMultipart(utf8('a'), '', []).contentType;
+  const one = buildMultipart(utf8('a'), '', [], 'заметка').contentType;
+  const two = buildMultipart(utf8('a'), '', [], 'заметка').contentType;
   assert.notEqual(one, two);
 });
 
 test('кавычка в имени файла не ломает заголовок части', () => {
-  const { body } = buildMultipart(utf8('т'), '', [{ name: 'кот"1.png', bytes: new Uint8Array([1]) }]);
+  const { body } = buildMultipart(utf8('т'), '', [{ name: 'кот"1.png', bytes: new Uint8Array([1]) }], 'заметка');
   const text = asText(body);
   assert.ok(text.includes('filename="кот\\"1.png"'));
 });
@@ -55,9 +55,15 @@ test('кавычка в имени файла не ломает заголово
 test('перевод строки в имени файла не создаёт лишних границ', () => {
   const { body, contentType } = buildMultipart(utf8('т'), '', [
     { name: 'a\r\n--boundary--\r\nb.png', bytes: new Uint8Array([1]) },
-  ]);
+  ], 'заметка');
   const boundary = contentType.split('boundary=')[1];
   const text = asText(body);
   const occurrences = text.split(`--${boundary}`).length - 1;
-  assert.equal(occurrences, 4); // folder, index.md, вложение, финальная граница — и ни одной лишней
+  assert.equal(occurrences, 5); // folder, name, index.md, вложение, финальная граница — и ни одной лишней
+});
+
+test('имя заметки уезжает полем name, как в CLI', () => {
+  const { body } = buildMultipart(utf8('текст'), '', [], 'Моя заметка');
+  const text = asText(body);
+  assert.ok(text.includes('Content-Disposition: form-data; name="name"\r\n\r\nМоя заметка\r\n'));
 });
