@@ -23,6 +23,7 @@ export const tr: Strings = {
   'notice.updated': 'Yazı güncellendi',
   'notice.published': 'Yazı yayımlandı',
   'notice.prepared': 'Not hazır. Yayımlamak için bir daha tıkla',
+  'notice.attachmentSkipped': 'Bu ekler gönderilmedi, sunucu bu adları kabul etmiyor: {names}',
   'confirm.unpublish': '“{name}” yayından kaldırılsın mı? Konuk bağlantıları artık çalışmaz.',
 
   'settings.language.name': 'Dil',

@@ -23,6 +23,7 @@ export const de: Strings = {
   'notice.updated': 'Der Artikel ist aktualisiert',
   'notice.published': 'Der Artikel ist veröffentlicht',
   'notice.prepared': 'Die Notiz ist fertig. Klicke noch einmal, um sie zu veröffentlichen',
+  'notice.attachmentSkipped': 'Diese Anhänge werden nicht gesendet, der Server nimmt solche Namen nicht an: {names}',
   'confirm.unpublish': '„{name}“ zurückziehen? Gastlinks dorthin funktionieren dann nicht mehr.',
 
   'settings.language.name': 'Sprache',

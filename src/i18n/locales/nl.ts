@@ -23,6 +23,7 @@ export const nl: Strings = {
   'notice.updated': 'Het artikel is bijgewerkt',
   'notice.published': 'Het artikel is gepubliceerd',
   'notice.prepared': 'De notitie is klaar. Klik nog een keer om die te publiceren',
+  'notice.attachmentSkipped': 'Deze bijlagen worden niet verstuurd, de server accepteert deze namen niet: {names}',
   'confirm.unpublish': '“{name}” intrekken? Gastlinks daarheen werken dan niet meer.',
 
   'settings.language.name': 'Taal',

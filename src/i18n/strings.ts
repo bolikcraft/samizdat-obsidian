@@ -23,6 +23,7 @@ export const en = {
   'notice.updated': 'The article is updated',
   'notice.published': 'The article is published',
   'notice.prepared': 'The note is ready. Click again to publish it',
+  'notice.attachmentSkipped': 'These attachments are not sent, the server does not accept their names: {names}',
   'confirm.unpublish': 'Unpublish “{name}”? Guest links to it will not work any more.',
 
   'settings.language.name': 'Language',

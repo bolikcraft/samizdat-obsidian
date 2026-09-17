@@ -23,6 +23,7 @@ export const zhHant: Strings = {
   'notice.updated': '文章已更新',
   'notice.published': '文章已發佈',
   'notice.prepared': '筆記已準備好。再點一次就能發佈',
+  'notice.attachmentSkipped': '這些附件未傳送，伺服器不接受這樣的名稱：{names}',
   'confirm.unpublish': '取消發佈「{name}」？訪客連結將不再有效。',
 
   'settings.language.name': '語言',

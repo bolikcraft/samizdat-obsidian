@@ -23,6 +23,7 @@ export const be: Strings = {
   'notice.updated': 'Артыкул абноўлены',
   'notice.published': 'Артыкул апублікаваны',
   'notice.prepared': 'Нататка аформлена. Націсніце яшчэ раз, каб апублікаваць',
+  'notice.attachmentSkipped': 'Гэтыя ўкладанні не адпраўлены, сервер не прымае такія назвы: {names}',
   'confirm.unpublish': 'Зняць «{name}» з публікацыі? Гасцявыя спасылкі на артыкул перастануць працаваць.',
 
   'settings.language.name': 'Мова',

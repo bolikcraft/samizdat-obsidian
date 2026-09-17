@@ -73,6 +73,7 @@ export class PublishAction {
         return;
       }
 
+      if (note.skipped.length > 0) new Notice(t('notice.attachmentSkipped', { names: note.skipped.join(', ') }));
       const hash = await this.client.put(note.slug, note.markdown, note.folder, note.attachments, note.name);
       this.serverState[note.slug] = hash;
       new Notice(t(state === 'changed' ? 'notice.updated' : 'notice.published'));

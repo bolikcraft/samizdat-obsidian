@@ -23,6 +23,7 @@ export const hu: Strings = {
   'notice.updated': 'A cikk frissítve',
   'notice.published': 'A cikk közzétéve',
   'notice.prepared': 'A jegyzet kész. Kattints újra a közzétételhez',
+  'notice.attachmentSkipped': 'Ezeket a mellékleteket nem küldtük el, a szerver nem fogad el ilyen nevet: {names}',
   'confirm.unpublish': 'Visszavonod ezt: „{name}”? A vendégeknek adott linkek ezután nem működnek.',
 
   'settings.language.name': 'Nyelv',

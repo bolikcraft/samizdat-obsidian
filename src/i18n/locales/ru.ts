@@ -23,6 +23,7 @@ export const ru: Strings = {
   'notice.updated': 'Статья обновлена',
   'notice.published': 'Статья опубликована',
   'notice.prepared': 'Заметка оформлена. Нажмите ещё раз, чтобы опубликовать',
+  'notice.attachmentSkipped': 'Эти вложения не отправлены, сервер не принимает такие имена: {names}',
   'confirm.unpublish': 'Снять «{name}» с публикации? Гостевые ссылки на неё перестанут работать.',
 
   'settings.language.name': 'Язык',

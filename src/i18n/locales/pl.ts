@@ -23,6 +23,7 @@ export const pl: Strings = {
   'notice.updated': 'Artykuł jest zaktualizowany',
   'notice.published': 'Artykuł jest opublikowany',
   'notice.prepared': 'Notatka jest gotowa. Kliknij jeszcze raz, aby ją opublikować',
+  'notice.attachmentSkipped': 'Te załączniki nie zostały wysłane, serwer nie przyjmuje takich nazw: {names}',
   'confirm.unpublish': 'Wycofać „{name}”? Linki dla gości przestaną działać.',
 
   'settings.language.name': 'Język',

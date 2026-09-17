@@ -23,6 +23,7 @@ export const uk: Strings = {
   'notice.updated': 'Статтю оновлено',
   'notice.published': 'Статтю опубліковано',
   'notice.prepared': 'Нотатку оформлено. Натисніть ще раз, щоб опублікувати',
+  'notice.attachmentSkipped': 'Ці вкладення не надіслано, сервер не приймає такі назви: {names}',
   'confirm.unpublish': 'Зняти «{name}» з публікації? Гостьові посилання на неї перестануть працювати.',
 
   'settings.language.name': 'Мова',

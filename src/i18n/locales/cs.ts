@@ -23,6 +23,7 @@ export const cs: Strings = {
   'notice.updated': 'Článek je aktualizován',
   'notice.published': 'Článek je publikován',
   'notice.prepared': 'Poznámka je připravena. Klikněte znovu a publikujte ji',
+  'notice.attachmentSkipped': 'Tyto přílohy nebyly odeslány, server takové názvy nepřijímá: {names}',
   'confirm.unpublish': 'Zrušit publikaci „{name}“? Odkazy pro hosty na ni přestanou fungovat.',
 
   'settings.language.name': 'Jazyk',

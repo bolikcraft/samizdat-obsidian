@@ -23,6 +23,7 @@ export const ja: Strings = {
   'notice.updated': '記事を更新しました',
   'notice.published': '記事を公開しました',
   'notice.prepared': 'ノートの準備ができました。もう一度押すと公開します',
+  'notice.attachmentSkipped': 'これらの添付ファイルは送信されません。サーバーはこの名前を受け付けません: {names}',
   'confirm.unpublish': '「{name}」の公開を停止しますか？ゲストリンクはもう使えなくなります。',
 
   'settings.language.name': '言語',

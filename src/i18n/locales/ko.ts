@@ -23,6 +23,7 @@ export const ko: Strings = {
   'notice.updated': '글을 업데이트했습니다',
   'notice.published': '글을 발행했습니다',
   'notice.prepared': '노트가 준비되었습니다. 발행하려면 한 번 더 누르세요',
+  'notice.attachmentSkipped': '이 첨부 파일은 보내지 않았습니다. 서버가 이런 이름을 받지 않습니다: {names}',
   'confirm.unpublish': '“{name}”의 발행을 취소할까요? 이 글의 게스트 링크는 더 이상 열리지 않습니다.',
 
   'settings.language.name': '언어',

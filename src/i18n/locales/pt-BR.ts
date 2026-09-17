@@ -23,6 +23,7 @@ export const ptBR: Strings = {
   'notice.updated': 'O artigo está atualizado',
   'notice.published': 'O artigo está publicado',
   'notice.prepared': 'A nota está pronta. Clique de novo para publicá-la',
+  'notice.attachmentSkipped': 'Estes anexos não foram enviados, o servidor não aceita esses nomes: {names}',
   'confirm.unpublish': 'Despublicar “{name}”? Os links de convidado vão parar de funcionar.',
 
   'settings.language.name': 'Idioma',

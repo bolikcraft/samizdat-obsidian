@@ -23,6 +23,7 @@ export const bg: Strings = {
   'notice.updated': 'Статията е обновена',
   'notice.published': 'Статията е публикувана',
   'notice.prepared': 'Бележката е готова. Натиснете отново, за да я публикувате',
+  'notice.attachmentSkipped': 'Тези прикачени файлове не са изпратени, сървърът не приема такива имена: {names}',
   'confirm.unpublish': 'Да спре ли публикуването на „{name}“? Връзките за гости към нея вече няма да работят.',
 
   'settings.language.name': 'Език',

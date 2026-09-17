@@ -23,6 +23,7 @@ export const id: Strings = {
   'notice.updated': 'Artikel sudah diperbarui',
   'notice.published': 'Artikel sudah terbit',
   'notice.prepared': 'Catatan sudah siap. Klik sekali lagi untuk menerbitkannya',
+  'notice.attachmentSkipped': 'Lampiran ini tidak dikirim, server tidak menerima nama seperti itu: {names}',
   'confirm.unpublish': 'Tarik "{name}"? Tautan tamu ke artikel ini tidak akan berfungsi lagi.',
 
   'settings.language.name': 'Bahasa',

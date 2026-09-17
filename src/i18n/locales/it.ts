@@ -23,6 +23,7 @@ export const it: Strings = {
   'notice.updated': 'L’articolo è aggiornato',
   'notice.published': 'L’articolo è pubblicato',
   'notice.prepared': 'La nota è pronta. Fai clic di nuovo per pubblicarla',
+  'notice.attachmentSkipped': 'Questi allegati non vengono inviati, il server non accetta questi nomi: {names}',
   'confirm.unpublish': 'Ritirare «{name}»? I link per gli ospiti non funzioneranno più.',
 
   'settings.language.name': 'Lingua',

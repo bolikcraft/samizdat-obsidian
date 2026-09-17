@@ -23,6 +23,7 @@ export const zhHans: Strings = {
   'notice.updated': '文章已更新',
   'notice.published': '文章已发布',
   'notice.prepared': '笔记已准备好。再点一次就能发布',
+  'notice.attachmentSkipped': '这些附件未发送，服务器不接受这样的名称：{names}',
   'confirm.unpublish': '取消发布“{name}”？访客链接将不再有效。',
 
   'settings.language.name': '语言',
