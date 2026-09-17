@@ -44,4 +44,7 @@ export const zhHant: Strings = {
   'error.slugSlash': 'slug「{slug}」不能包含 / 或 \\',
   'error.slugDots': 'slug「{slug}」不能包含「..」',
   'error.slugDot': 'slug「{slug}」不能以點開頭',
+  'error.slugControl': 'slug「{slug}」不能包含控制字元',
+  'error.slugQuery': 'slug「{slug}」不能包含 ?、# 或 %',
+  'error.slugLong': 'slug「{slug}」在 UTF-8 中超過 {max} 位元組',
 };

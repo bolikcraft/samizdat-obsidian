@@ -44,4 +44,7 @@ export const it: Strings = {
   'error.slugSlash': 'lo slug «{slug}» non deve contenere / o \\',
   'error.slugDots': 'lo slug «{slug}» non deve contenere «..»',
   'error.slugDot': 'lo slug «{slug}» non deve iniziare con un punto',
+  'error.slugControl': 'lo slug «{slug}» non deve contenere caratteri di controllo',
+  'error.slugQuery': 'lo slug «{slug}» non deve contenere ?, # o %',
+  'error.slugLong': 'lo slug «{slug}» supera {max} byte in UTF-8',
 };

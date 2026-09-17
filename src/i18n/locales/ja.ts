@@ -44,4 +44,7 @@ export const ja: Strings = {
   'error.slugSlash': 'slug「{slug}」に / や \\ は使えません',
   'error.slugDots': 'slug「{slug}」に「..」は使えません',
   'error.slugDot': 'slug「{slug}」の先頭にドットは使えません',
+  'error.slugControl': 'slug「{slug}」に制御文字は使えません',
+  'error.slugQuery': 'slug「{slug}」に ?、#、% は使えません',
+  'error.slugLong': 'slug「{slug}」が UTF-8 で {max} バイトを超えています',
 };

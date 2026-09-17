@@ -44,6 +44,9 @@ export const en = {
   'error.slugSlash': 'the slug “{slug}” must not contain / or \\',
   'error.slugDots': 'the slug “{slug}” must not contain “..”',
   'error.slugDot': 'the slug “{slug}” must not start with a dot',
+  'error.slugControl': 'the slug “{slug}” must not contain control characters',
+  'error.slugQuery': 'the slug “{slug}” must not contain ?, # or %',
+  'error.slugLong': 'the slug “{slug}” is longer than {max} bytes in UTF-8',
 };
 
 export type Strings = Record<keyof typeof en, string>;

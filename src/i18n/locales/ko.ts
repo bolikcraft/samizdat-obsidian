@@ -44,4 +44,7 @@ export const ko: Strings = {
   'error.slugSlash': 'slug “{slug}”에 / 나 \\ 기호를 쓸 수 없습니다',
   'error.slugDots': 'slug “{slug}”에 “..”를 쓸 수 없습니다',
   'error.slugDot': 'slug “{slug}”의 첫 글자는 점일 수 없습니다',
+  'error.slugControl': 'slug “{slug}”에 제어 문자를 쓸 수 없습니다',
+  'error.slugQuery': 'slug “{slug}”에 ?, #, % 기호를 쓸 수 없습니다',
+  'error.slugLong': 'slug “{slug}”이(가) UTF-8로 {max}바이트를 넘습니다',
 };

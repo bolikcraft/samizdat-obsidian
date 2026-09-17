@@ -44,4 +44,7 @@ export const nl: Strings = {
   'error.slugSlash': 'de slug “{slug}” mag geen / of \\ bevatten',
   'error.slugDots': 'de slug “{slug}” mag geen “..” bevatten',
   'error.slugDot': 'de slug “{slug}” mag niet met een punt beginnen',
+  'error.slugControl': 'de slug “{slug}” mag geen stuurtekens bevatten',
+  'error.slugQuery': 'de slug “{slug}” mag geen ?, # of % bevatten',
+  'error.slugLong': 'de slug “{slug}” is langer dan {max} bytes in UTF-8',
 };

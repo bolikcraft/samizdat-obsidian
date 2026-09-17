@@ -44,4 +44,7 @@ export const pl: Strings = {
   'error.slugSlash': 'slug „{slug}” nie może zawierać / ani \\',
   'error.slugDots': 'slug „{slug}” nie może zawierać „..”',
   'error.slugDot': 'slug „{slug}” nie może zaczynać się od kropki',
+  'error.slugControl': 'slug „{slug}” nie może zawierać znaków sterujących',
+  'error.slugQuery': 'slug „{slug}” nie może zawierać ?, # ani %',
+  'error.slugLong': 'slug „{slug}” ma więcej niż {max} bajtów w UTF-8',
 };

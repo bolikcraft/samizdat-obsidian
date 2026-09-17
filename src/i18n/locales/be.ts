@@ -44,4 +44,7 @@ export const be: Strings = {
   'error.slugSlash': 'slug «{slug}» не павінен утрымліваць / або \\',
   'error.slugDots': 'slug «{slug}» не павінен утрымліваць «..»',
   'error.slugDot': 'slug «{slug}» не павінен пачынацца з кропкі',
+  'error.slugControl': 'slug «{slug}» не павінен утрымліваць кіравальныя сімвалы',
+  'error.slugQuery': 'slug «{slug}» не павінен утрымліваць ?, # або %',
+  'error.slugLong': 'slug «{slug}» даўжэйшы за {max} байтаў у UTF-8',
 };

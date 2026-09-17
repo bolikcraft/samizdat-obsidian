@@ -44,4 +44,7 @@ export const hu: Strings = {
   'error.slugSlash': 'a slug nem tartalmazhat / vagy \\ jelet: „{slug}”',
   'error.slugDots': 'a slug nem tartalmazhat „..” jelet: „{slug}”',
   'error.slugDot': 'a slug nem kezdődhet ponttal: „{slug}”',
+  'error.slugControl': 'a slug nem tartalmazhat vezérlőkaraktert: „{slug}”',
+  'error.slugQuery': 'a slug nem tartalmazhat ?, # vagy % jelet: „{slug}”',
+  'error.slugLong': 'a slug hosszabb {max} bájtnál UTF-8-ban: „{slug}”',
 };

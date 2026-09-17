@@ -44,4 +44,7 @@ export const tr: Strings = {
   'error.slugSlash': '“{slug}” slug’ı / ve \\ içeremez',
   'error.slugDots': '“{slug}” slug’ı “..” içeremez',
   'error.slugDot': '“{slug}” slug’ı nokta ile başlayamaz',
+  'error.slugControl': '“{slug}” slug’ı kontrol karakterleri içeremez',
+  'error.slugQuery': '“{slug}” slug’ı ?, # ve % içeremez',
+  'error.slugLong': '“{slug}” slug’ı UTF-8’de {max} bayttan uzun',
 };

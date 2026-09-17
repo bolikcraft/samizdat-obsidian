@@ -44,4 +44,7 @@ export const ptBR: Strings = {
   'error.slugSlash': 'o slug “{slug}” não pode conter / nem \\',
   'error.slugDots': 'o slug “{slug}” não pode conter “..”',
   'error.slugDot': 'o slug “{slug}” não pode começar com ponto',
+  'error.slugControl': 'o slug “{slug}” não pode conter caracteres de controle',
+  'error.slugQuery': 'o slug “{slug}” não pode conter ?, # nem %',
+  'error.slugLong': 'o slug “{slug}” tem mais de {max} bytes em UTF-8',
 };

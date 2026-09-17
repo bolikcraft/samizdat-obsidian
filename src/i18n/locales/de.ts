@@ -44,4 +44,7 @@ export const de: Strings = {
   'error.slugSlash': 'der Slug „{slug}“ darf kein / und kein \\ enthalten',
   'error.slugDots': 'der Slug „{slug}“ darf kein „..“ enthalten',
   'error.slugDot': 'der Slug „{slug}“ darf nicht mit einem Punkt beginnen',
+  'error.slugControl': 'der Slug „{slug}“ darf keine Steuerzeichen enthalten',
+  'error.slugQuery': 'der Slug „{slug}“ darf kein ?, # und kein % enthalten',
+  'error.slugLong': 'der Slug „{slug}“ ist länger als {max} Bytes in UTF-8',
 };

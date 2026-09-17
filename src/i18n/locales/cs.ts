@@ -44,4 +44,7 @@ export const cs: Strings = {
   'error.slugSlash': 'slug „{slug}“ nesmí obsahovat / ani \\',
   'error.slugDots': 'slug „{slug}“ nesmí obsahovat „..“',
   'error.slugDot': 'slug „{slug}“ nesmí začínat tečkou',
+  'error.slugControl': 'slug „{slug}“ nesmí obsahovat řídicí znaky',
+  'error.slugQuery': 'slug „{slug}“ nesmí obsahovat ?, # ani %',
+  'error.slugLong': 'slug „{slug}“ je delší než {max} bajtů v UTF-8',
 };

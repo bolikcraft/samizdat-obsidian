@@ -44,4 +44,7 @@ export const uk: Strings = {
   'error.slugSlash': 'slug «{slug}» не повинен містити / або \\',
   'error.slugDots': 'slug «{slug}» не повинен містити «..»',
   'error.slugDot': 'slug «{slug}» не повинен починатися з крапки',
+  'error.slugControl': 'slug «{slug}» не повинен містити керівні символи',
+  'error.slugQuery': 'slug «{slug}» не повинен містити ?, # або %',
+  'error.slugLong': 'slug «{slug}» довший за {max} байтів в UTF-8',
 };

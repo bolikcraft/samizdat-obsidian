@@ -44,4 +44,7 @@ export const id: Strings = {
   'error.slugSlash': 'slug "{slug}" tidak boleh berisi / atau \\',
   'error.slugDots': 'slug "{slug}" tidak boleh berisi ".."',
   'error.slugDot': 'slug "{slug}" tidak boleh diawali titik',
+  'error.slugControl': 'slug "{slug}" tidak boleh berisi karakter kontrol',
+  'error.slugQuery': 'slug "{slug}" tidak boleh berisi ?, # atau %',
+  'error.slugLong': 'slug "{slug}" lebih dari {max} byte dalam UTF-8',
 };

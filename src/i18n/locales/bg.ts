@@ -44,4 +44,7 @@ export const bg: Strings = {
   'error.slugSlash': 'slug „{slug}“ не трябва да съдържа / или \\',
   'error.slugDots': 'slug „{slug}“ не трябва да съдържа „..“',
   'error.slugDot': 'slug „{slug}“ не трябва да започва с точка',
+  'error.slugControl': 'slug „{slug}“ не трябва да съдържа управляващи символи',
+  'error.slugQuery': 'slug „{slug}“ не трябва да съдържа ?, # или %',
+  'error.slugLong': 'slug „{slug}“ е по-дълъг от {max} байта в UTF-8',
 };
